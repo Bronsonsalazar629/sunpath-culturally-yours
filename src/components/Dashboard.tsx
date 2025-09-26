@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import MorningSunCheckIn from "./MorningSunCheckIn";
 import CulturalEmotionCanvas from "./CulturalEmotionCanvas";
+import ResourceDiscoveryMap from "./ResourceDiscoveryMap";
 
 interface WellnessMetric {
   label: string;
@@ -24,7 +25,7 @@ interface WellnessMetric {
 }
 
 const Dashboard = () => {
-  const [activeView, setActiveView] = useState<'dashboard' | 'checkin' | 'canvas'>('dashboard');
+  const [activeView, setActiveView] = useState<'dashboard' | 'checkin' | 'canvas' | 'resources'>('dashboard');
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const wellnessMetrics: WellnessMetric[] = [
@@ -72,6 +73,10 @@ const Dashboard = () => {
     return <CulturalEmotionCanvas />;
   }
 
+  if (activeView === 'resources') {
+    return <ResourceDiscoveryMap />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
       {/* Header */}
@@ -111,7 +116,7 @@ const Dashboard = () => {
         </Card>
 
         {/* Quick Actions */}
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
           <Card 
             className="card-embrace p-6 cursor-pointer hover:scale-[1.02] transition-transform"
             onClick={() => setActiveView('checkin')}
@@ -141,6 +146,23 @@ const Dashboard = () => {
                 <h3 className="text-lg font-semibold text-wisdom mb-1">Cultural Emotion Canvas</h3>
                 <p className="text-gentle text-sm">
                   Express feelings through culturally meaningful symbols
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card 
+            className="card-embrace p-6 cursor-pointer hover:scale-[1.02] transition-transform"
+            onClick={() => setActiveView('resources')}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-accent to-primary flex items-center justify-center">
+                <Globe className="w-8 h-8 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-wisdom mb-1">Cultural Resource Map</h3>
+                <p className="text-gentle text-sm">
+                  Find culturally-competent mental health providers
                 </p>
               </div>
             </div>
