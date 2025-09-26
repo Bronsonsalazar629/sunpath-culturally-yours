@@ -12,13 +12,15 @@ import {
   Sparkles,
   Moon,
   Star,
-  BookOpen
+  BookOpen,
+  MessageCircle
 } from "lucide-react";
 import MorningSunCheckIn from "./MorningSunCheckIn";
 import CulturalEmotionCanvas from "./CulturalEmotionCanvas";
 import ResourceDiscoveryMap from "./ResourceDiscoveryMap";
 import AnalyticsDashboard from "./AnalyticsDashboard";
 import ResearchPlatform from "./ResearchPlatform";
+import { ConversationFoundation } from "./conversation/ConversationFoundation";
 
 interface WellnessMetric {
   label: string;
@@ -28,7 +30,7 @@ interface WellnessMetric {
 }
 
 const Dashboard = () => {
-  const [activeView, setActiveView] = useState<'dashboard' | 'checkin' | 'canvas' | 'resources' | 'analytics' | 'research'>('dashboard');
+  const [activeView, setActiveView] = useState<'dashboard' | 'checkin' | 'canvas' | 'conversation' | 'resources' | 'analytics' | 'research'>('dashboard');
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const wellnessMetrics: WellnessMetric[] = [
@@ -74,6 +76,10 @@ const Dashboard = () => {
 
   if (activeView === 'canvas') {
     return <CulturalEmotionCanvas />;
+  }
+
+  if (activeView === 'conversation') {
+    return <ConversationFoundation />;
   }
 
   if (activeView === 'resources') {
@@ -157,6 +163,23 @@ const Dashboard = () => {
                 <h3 className="text-lg font-semibold text-wisdom mb-1">Cultural Emotion Canvas</h3>
                 <p className="text-gentle text-sm">
                   Express feelings through culturally meaningful symbols
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card 
+            className="card-embrace p-6 cursor-pointer hover:scale-[1.02] transition-transform"
+            onClick={() => setActiveView('conversation')}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                <MessageCircle className="w-8 h-8 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-wisdom mb-1">AI Conversation</h3>
+                <p className="text-gentle text-sm">
+                  Culturally-intelligent conversation interface
                 </p>
               </div>
             </div>
