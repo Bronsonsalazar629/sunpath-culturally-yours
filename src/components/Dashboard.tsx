@@ -11,12 +11,14 @@ import {
   Globe,
   Sparkles,
   Moon,
-  Star
+  Star,
+  BookOpen
 } from "lucide-react";
 import MorningSunCheckIn from "./MorningSunCheckIn";
 import CulturalEmotionCanvas from "./CulturalEmotionCanvas";
 import ResourceDiscoveryMap from "./ResourceDiscoveryMap";
 import AnalyticsDashboard from "./AnalyticsDashboard";
+import ResearchPlatform from "./ResearchPlatform";
 
 interface WellnessMetric {
   label: string;
@@ -26,7 +28,7 @@ interface WellnessMetric {
 }
 
 const Dashboard = () => {
-  const [activeView, setActiveView] = useState<'dashboard' | 'checkin' | 'canvas' | 'resources' | 'analytics'>('dashboard');
+  const [activeView, setActiveView] = useState<'dashboard' | 'checkin' | 'canvas' | 'resources' | 'analytics' | 'research'>('dashboard');
   const [currentTime, setCurrentTime] = useState(new Date());
 
   const wellnessMetrics: WellnessMetric[] = [
@@ -82,6 +84,10 @@ const Dashboard = () => {
     return <AnalyticsDashboard />;
   }
 
+  if (activeView === 'research') {
+    return <ResearchPlatform onBack={() => setActiveView('dashboard')} />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary/5 to-primary/5">
       {/* Header */}
@@ -121,7 +127,7 @@ const Dashboard = () => {
         </Card>
 
         {/* Quick Actions */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           <Card 
             className="card-embrace p-6 cursor-pointer hover:scale-[1.02] transition-transform"
             onClick={() => setActiveView('checkin')}
@@ -185,6 +191,23 @@ const Dashboard = () => {
                 <h3 className="text-lg font-semibold text-wisdom mb-1">Wisdom Analytics</h3>
                 <p className="text-gentle text-sm">
                   Beautiful insights that honor your cultural journey
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          <Card 
+            className="card-embrace p-6 cursor-pointer hover:scale-[1.02] transition-transform"
+            onClick={() => setActiveView('research')}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-accent to-primary flex items-center justify-center">
+                <BookOpen className="w-8 h-8 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-wisdom mb-1">Research Platform</h3>
+                <p className="text-gentle text-sm">
+                  Contribute to cultural mental health wisdom
                 </p>
               </div>
             </div>
